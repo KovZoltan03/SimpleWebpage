@@ -1,0 +1,40 @@
+<%- include('header_mainpage') -%>
+    <header>
+        <h1>Megrendelések</h1>
+    </header>
+
+
+        <div class="">
+
+            <a class="ref" href="/megrendeles/add"><button class="btn add">Új megrendelés hozzáadása</button></a>
+    
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Megrendelő neve</th>
+                        <th>Átadás várható ideje</th>
+                        <th>Kivitelezés ára</th>
+                        <th>Kifizetve</th>
+                        <th class="rejtett-col elrejtes"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% megrendelesek.forEach(function(mr){ %>
+                        <tr>
+                            <td><%= mr.megrendelonev %></td>
+                            <td><%= mr.atadasido.getFullYear() %>.<%= mr.atadasido.getMonth() + 1 %>.<%= mr.atadasido.getDate() %> mF</td>
+                            <td><%= mr.kivitar %> mF</td>
+                            <% if(mr.kifizetve){ %> <td>Igen</td> <% } else{ %> <td>Nem</td><% } %>
+                            <td class="actions elrejtes">
+                                <a href="/anyag/<%= mr._id %>"><button class="btn">Használt anyagok</button></a>
+                                <a href="/megrendeles/delete/<%= mr._id %>"><button class="btn">Törlés</button></a>
+                                <a href="/megrendeles/update/<%= mr._id %>"><button class="btn">Módosítás</button></a>
+                            </td>
+                        </tr>
+                    <% });%>
+                </tbody>
+            </table>
+        </div>
+
+<%- include('footer') -%>

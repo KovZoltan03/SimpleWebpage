@@ -1,0 +1,28 @@
+<%- include('header_other') -%>
+<form method="POST" action="/anyag/<%= megrendeles._id %>/update/<%= anyag._id %>">
+    <h1>Anyag módosítás</h1>
+
+    <label for="anyagNeve">Anyag neve:</label>
+    <input type="text" id="anyagNeve" name="anyagNeve" required value="<%= anyag.anyagnev %>">
+
+    <label for="anyagMennyiseg">Anyagmennyiség (t):</label>
+    <input type="number" id="anyagMennyiseg" name="anyagMennyiseg" required min="0" value="<%= anyag.anyagmennyiseg %>">
+
+    <label for="anyagHelye">Anyag Helye:</label>
+    <input type="text" id="anyagHelye" name="anyagHelye" required value="<%= anyag.anyaghely %>">
+    
+    <label for="felhasznalasiTerulet">Felhasználási terület:</label>
+    <input type="text" id="felhasznalasiTerulet" name="felhasznalasiTerulet" required value="<%= anyag.anyagfelhter %>">
+
+    <div>
+        <button type="submit">Mentés</button>
+        <button type="button" onclick="goBack()">Vissza</button>
+    </div>
+</form>
+
+<script>
+    function goBack() {
+        window.location.href = "/anyag/<%= megrendeles._id %>"
+    }
+</script>
+<%- include('footer') -%>

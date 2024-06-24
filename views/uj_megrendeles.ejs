@@ -1,0 +1,35 @@
+<%- include('header_other') -%>
+<form method="POST" action="/megrendeles/add">
+    <h1>Megrendelés hozzáadása</h1>
+
+    <label for="megrendeloNeve">Megrendelő neve:</label>
+    <input type="text" id="megrendeloNeve" name="megrendeloNeve" required>
+
+    <label for="atadasVarhatoIdeje">Átadás várható ideje:</label>
+    <input type="date" id="atadasVarhatoIdeje" name="atadasVarhatoIdeje" required>
+
+    <label for="kivitelezesAra">Kivitelezés ára (mF):</label>
+    <div style="display: flex;">
+        <input type="number" id="kivitelezesAra" name="kivitelezesAra" required min="0" oninput="validity.valid||(value='');">
+    </div>
+
+    <label for="kifizetve">Kifizetve:</label>
+    <select id="kifizetve" name="kifizetve" required>
+        <option value="" disabled selected>Válasszon az alábbiakból...</option>
+        <option value="true">Igen</option>
+        <option value="false">Nem</option>
+    </select>
+
+    <div>
+        <button type="submit">Hozzáadás</button>
+        <button class="button" onclick="btn_cancel()">Vissza</button>
+    </div>
+</form>
+
+<script>
+    function btn_cancel(){
+        window.location.href = "/";
+        return false;
+    }
+</script>
+<%- include('footer') -%>

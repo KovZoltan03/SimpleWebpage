@@ -1,0 +1,56 @@
+<%- include('header_other') -%>
+<form action="/megrendeles/update/<%= megrendeles._id %>" method="post">
+    <h1>Megrendelés módosítása</h1>
+
+    <div class="form-group">
+        <label for="megrendeloNeve">Megrendelő neve:</label>
+        <input type="text" class="form-control" id="megrendeloNeve" name="megrendeloNeve" required value="<%= megrendeles.megrendelonev %>">
+    </div>
+    
+    <div class="form-group">
+        <label for="atadasVarhatoIdeje">Átadás várható ideje:</label>
+        <input type="date" class="form-control" id="atadasVarhatoIdeje" name="atadasVarhatoIdeje" required 
+            <% if(megrendeles.atadasido.getMonth() + 1 >= 10){ %>
+                <% if(megrendeles.atadasido.getDate() >= 10){ %>
+                    value="<%= megrendeles.atadasido.getFullYear() %>-<%= megrendeles.atadasido.getMonth()+1 %>-<%= megrendeles.atadasido.getDate() %>"
+                <% } else{ %>
+                        value="<%= megrendeles.atadasido.getFullYear() %>-<%= megrendeles.atadasido.getMonth()+1 %>-0<%= megrendeles.atadasido.getDate() %>"
+                <% } %>
+            <% } else{ %>
+                <% if(megrendeles.atadasido.getDate() >= 10){ %>
+                    value="<%= megrendeles.atadasido.getFullYear() %>-0<%= megrendeles.atadasido.getMonth()+1 %>-<%= megrendeles.atadasido.getDate() %>"
+                <% } else{ %>
+                        value="<%= megrendeles.atadasido.getFullYear() %>-0<%= megrendeles.atadasido.getMonth()+1 %>-0<%= megrendeles.atadasido.getDate() %>"
+                <% } %>
+            <% } %>
+        >
+    </div>
+    
+    <div class="form-group">
+        <label for="kivitelezesAra">Kivitelezés ára (mF):</label>
+        <div style="display: flex;">
+            <input type="number" class="form-control" id="kivitelezesAra" name="kivitelezesAra" required min="0" value="<%= megrendeles.kivitar %>">
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="kifizetve">Kifizetve:</label>
+        <select class="form-control" id="kifizetve" name="kifizetve" required>
+            <option value="" disabled selected>Válasszon az alábbiakból...</option>
+            <option <% if(megrendeles.kifizetve){ %> selected="SELECTED" <% } else{ %><% } %> value="true">Igen</option>
+            <option <% if(!megrendeles.kifizetve){ %> selected="SELECTED" <% } else{ %><% } %> value="false">Nem</option>
+        </select>
+    </div>
+        
+    <div>
+        <button type="submit">Mentés</button>
+        <button type="button" onclick="btn_cancel()">Vissza</button>
+    </div>
+</form>
+
+<script>
+    function btn_cancel(){
+        window.location.href = "/";
+    }
+</script>
+<%- include('footer') -%>

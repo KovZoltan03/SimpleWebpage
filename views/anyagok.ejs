@@ -1,0 +1,38 @@
+<%- include('header_mainpage') -%>
+<header>
+    <h1>Használt anyagok</h1>
+</header>
+
+<a href="/anyag/<%= megrendeles._id %>/add"><button class="btn add">Új anyag hozzáadása</button></a>
+
+
+<a href="/"><button class="btn">Vissza</button></a>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Anyag neve</th>
+            <th>Anyagmennyiség</th>
+            <th>Anyag helye</th>
+            <th>Felhasználási terület</th>
+            <th class="rejtett-col elrejtes"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% anyagok.forEach(function(anyag){ %>
+            <tr>
+                <td><%= anyag.anyagnev %></td>
+                <td><%= anyag.anyagmennyiseg %> t</td>
+                <td><%= anyag.anyaghely %></td>
+                <td><%= anyag.anyagfelhter %></td>
+                <td class="actions elrejtes">
+                    <a href="/anyag/<%= megrendeles._id %>/delete/<%= anyag._id %>"><button class="btn">Törlés</button></a>
+                    <a href="/anyag/<%= megrendeles._id %>/update/<%= anyag._id %>"><button class="btn">Módosítás</button></a>
+                </td>
+            </tr>
+        <% });%>
+    </tbody>
+</table>
+
+<%- include('footer') -%>
